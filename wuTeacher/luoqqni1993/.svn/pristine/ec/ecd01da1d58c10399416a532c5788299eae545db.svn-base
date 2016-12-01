@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="1000" height="500" style="border:1px solid black"></canvas>
+	</body>
+	<script type="text/javascript">
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
+		var s={
+			x:100,
+			y:100,
+			r:50,
+			direction:"right",
+			state:false,
+			leve:50,
+			mleve:50,
+			speed:2,
+			color:"#f0ad4e"
+		}
+		var dList=[];
+		createDou(30);
+		function createDou(num){
+			for(var i=0;i<num;i++){
+				var d={
+					x:200+20*i,
+					y:100,
+					r:3,
+					color:"#000"
+				}
+				dList.push(d);
+			}
+		}
+		function drawDou(){
+			for(var i in dList){
+				var dX=dList[i].x;
+				var dY=dList[i].y;
+				var dR=dList[i].r;
+				ctx.fillStyle=dList[i].color;
+				ctx.arc(dX,dY,dR,0,2*Math.PI);
+				ctx.fill();
+				ctx.beginPath();
+			}
+			
+		}
+		function run(){
+			setTimeout(function(){
+				ctx.clearRect(0,0,c.width,c.height);
+				sDou();
+				drawDou();
+				run();
+				if(s.x>c.width-s.r){
+					s.direction="left";
+				}
+				if(s.x<s.r){
+					s.direction="right";
+				}
+				if(s.y>c.height-s.r){
+					s.direction="top";
+				}
+				if(s.y<s.r){
+					s.direction="down";
+				}
+				switch(s.direction){
+					case "right":s.x=s.x+s.speed;break;
+					case "left" :s.x=s.x-s.speed;break;
+					case "down" :s.y=s.y+s.speed;break;
+					case "top"  :s.y=s.y-s.speed;break;
+				}
+				for(var i in dList){
+					var absX=Math.abs(s.x-dList[i].x);
+					var absY=Math.abs(s.y-dList[i].y);
+					switch(s.direction){
+						case "right" :
+						if(s.x>dList[i].x&&absX<s.r&&absY<s.r){
+							dList.splice(i,1);
+						}
+						break;
+						case "left" :
+						if(s.x<dList.x&&absX<s.r&&absY<s.r){
+							dList.splice(i,1);
+						}
+						break;
+						case "top" :
+						if(s.y<dList.y&&absY<s.r&&absY<s.r){
+							dList.splice(i,1);
+						}
+						break;
+						case "down" :
+						if(s.y>dList.y&&absY<s.r&&absY<s.r){
+							dList.splice(i,1);
+						}
+						break;
+					}
+				}
+			},10)
+		}
+		run();
+		function sDou(){
+			ctx.fillStyle=s.color;
+			var tMou=null;
+			var dMou=null;
+			switch(s.direction){
+				case "left":tMou=s.leve*(0.25/s.mleve)+1;
+							dMou=2-s.leve*(0.25/s.mleve)+1;
+							break;
+				case "right":tMou=s.leve*(0.25/s.mleve);
+							 dMou=2-s.leve*(0.25/s.mleve);
+							 break;
+				case "down" :tMou=s.leve*(0.25/s.mleve)+0.5;
+							 dMou=2-s.leve*(0.25/s.mleve)+0.5;
+							 break;
+				case "top" :tMou=s.leve*(0.25/s.mleve)+1.5;
+							 dMou=2-s.leve*(0.25/s.mleve)+1.5;
+							 break;
+			}
+			ctx.moveTo(s.x,s.y);
+			ctx.arc(s.x,s.y,s.r,tMou*Math.PI,dMou*Math.PI);
+			ctx.lineTo(s.x,s.y);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			if(s.state){
+				s.leve++;
+			}else{
+				s.leve--;
+			}
+			if(s.leve>s.mleve){
+				s.state=false;
+			}else if(s.leve<0){
+				s.state=true;
+			}
+		}
+		document.onkeydown=function(evt){
+			e=evt||window.event;
+			console.log(e.keyCode);
+			if(e.keyCode==37){
+				s.direction="left";
+			}
+			if(e.keyCode==39){
+				s.direction="right";
+			}
+			if(e.keyCode==38){
+				s.direction="top";
+			}
+			if(e.keyCode==40){
+				s.direction="down";
+			}
+		}
+	</script>
+</html>

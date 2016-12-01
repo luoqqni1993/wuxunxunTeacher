@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="myModule">
+		<div ng-controller="myController">
+			<table border="1">
+				<tr>
+					<td>FirstName</td>
+					<td>LastName</td>
+					<td>Gender</td>
+					<td>Likes</td>
+					<td>DisLikes</td>
+					<td>LiskeSButton</td>
+					<td>DisLikesButton</td>
+				</tr>
+				<tr ng-repeat="employee in employees">
+					<td>{{employee.firstName}}</td>
+					<td>{{employee.lastName}}</td>
+					<td>{{employee.gender}}</td>
+					<td>{{employee.likes}}</td>
+					<td>{{employee.disLikes}}</td>
+					<td><button ng-click="incrementLikes(employee)">Likes</button></td>
+					<td><button ng-click="incrementDisLikes(employee)">DisLikes</button></td>
+				</tr>
+			</table>
+		</div>
+		<script src="js/libs/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/event.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

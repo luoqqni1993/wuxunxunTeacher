@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="myModule">
+		<div ng-controller="myController">
+			<ul ng-repeat="province in provinces">
+				<li>
+					{{province.name}} index:{{$index}}
+				</li>
+				<ul ng-repeat="city in province.cities">
+					<li>
+						{{city.name}} psrent index:{{$parent.$index}} index:{{$index}}
+					</li>
+				</ul>
+			</ul>
+		</div>
+		<script src="js/libs/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/ng-repeat2.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

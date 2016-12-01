@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div style="border:2px dashed #ccc;width:320px;text-align:center;">
+			<label for="sitname">网站名(key):</label>
+			<input type="text" id="sitename" name="sitename" class="text" />
+			<br />
+			<label for="siteurl">网址(value):</label>
+			<input type="text" id="siteurl" name="siteurl" />
+			<br />
+			<input type="button" onclick="save()" value="新增记录"/>
+			<hr />
+			<label for="serch_phone">输入网站名:</label>
+			<input type="text" id="search_site" name="search_site" />
+			<input type="button" onclick="find()" value="查找网站"/>
+			<p id="find_result"></p>
+			
+		</div>
+		<div id="list"></div>
+		<script>
+				loadAll();
+				function save(){
+					var siteurl=document.getElementById("siteurl").value;
+					var sitename=document.getElementById("sitename").value;
+					localStorage.setItem(sitename,siteurl);
+					alert("添加成功");
+				}
+				function find(){
+					var search_site=document.getElementById("search_site").value;
+					var sitename=localStorage.getItem(search_site);
+					var find_result=document.getElementById("find_result");
+					find_result.innerHTML=search_site+"网址是:"+sitename;
+				}
+				function loadAll(){
+					var list=document.getElementById("list");
+					if(localStorage.length>0){
+						var result="<table border='1'>";
+						result+="<tr><td>网站名</td><td>网址</td></tr>";
+						for(var i=0;i<localStorage.length;i++){
+							var sitename=localStorage.key(i);
+							var siteurl=localStorage.getItem(sitename);
+							console.log(siteurl);
+							result+="<tr><td>"+sitename+"</td><td>"+siteurl+"</td></tr>";
+						}
+						result+="</table>";
+						list.innerHTML=result;
+					}else{
+						list.innerHTML="数据为空.......";
+					}
+				}
+			</script>
+	</body>
+</html>

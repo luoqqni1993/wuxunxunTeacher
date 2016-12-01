@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>购物车</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header>
+		<a href="javascript:;" class="btn bar-left"></a>
+		<h2>购物车</h2>
+		<a href="javascript:;" class="btn bar-right">结算</a>
+	</header>
+	<article class="main shop-car">
+		<p class="car-data-box">
+			商品数量: <span class="number"></span>应付总额(不含运费): <span class="count"></span>
+		</p>
+		<ul class="car-box">
+			<li class="clearfix">
+				<div class="img-box flt">
+					<img src="" alt="">
+				</div>
+				<div class="content-box flt">
+					<p class="goods-name"></p>
+					<p class="price">单价: <span>¥<i></i></span></p>
+					<div class="number">
+						<a href="javascript:;" data-type="minus" class="number-btn">-</a>
+						<input type="text">
+						<a href="javascript:;" data-type="add" class="number-btn">+</a>
+					</div>
+					<a href="javascript:;" class="remove-btn iconfont"></a>
+				</div>
+			</li>
+		</ul>
+	</article>
+	<script src="js/jquery-1.12.0.min.js"></script>
+	<script src="js/shopCar.js"></script>
+</body>
+</html>

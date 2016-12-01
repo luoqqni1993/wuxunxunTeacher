@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<script>
+			if(typeof(Storage)!=="undefined"){
+				localStorage.sitname="菜鸟教程";
+				document.getElementById("result").innerHTML="网站名"+localStorage.sitname;
+			}
+			else{
+				document.getElementById("result").innerHTML="对不起,您的浏览器不支持web存储";
+			}
+		</script>
+	</body>
+</html>

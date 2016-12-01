@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.arrow-up{
+				width:0;
+				height:0;
+				border-left:5px solid transparent;
+				border-right:5px solid transparent;
+				border-bottom:10px solid black;
+				display:inline-block;
+			}
+			.arrow-down{
+				width:0;
+				height:0;
+				border-left:5px solid transparent;
+				border-right:5px solid transparent;
+				border-top:10px solid black;
+				display:inline-block;
+			}
+		</style>
+	</head>
+	<body ng-app="myModule">
+		<div ng-controller="myController">
+			<input type="text" placeholder="search keywords" ng-model="searchText.firstName" />
+			<input type="text" placeholder="search keywords" ng-model="searchText.lastName" />
+			<input type="checkbox" ng-model="exactMatch" />Exact Match
+			<table border="1" cellspacing="0">
+				<tr>
+					<td ng-click="sortData('firstName')">FirstName
+						<div ng-class="getSortClass('firstName')"></div>
+					</td>
+					<td ng-click="sortData('lastName')">LastName
+						<div ng-class="getSortClass('lastName')"></div>
+					</td>
+					<td ng-click="sortData('gender')">Gender
+						<div ng-class="getSortClass('gender')"></div>
+					</td>
+					<td ng-click="sortData('salary')">Salary
+						<div ng-class="getSortClass('salary')"></div>
+					</td>
+					<td>Salary</td>
+					<td ng-click="sortData('birthday')">Birthday
+						<div ng-class="getSortClass('birthday')"></div>
+					</td>
+				</tr>
+				<tr ng-repeat="employee in employees | orderBy:sortColumn:reverseSort | filter:searchText">
+					<td>{{employee.firstName | uppercase}}</td>
+					<td>{{employee.lastName | lowercase}}</td>
+					<td>{{employee.gender}}</td>
+					<td>{{employee.salary | number:2}}</td>
+					<td>{{employee.salary | currency:'$':1}}</td>
+					<td>{{employee.birthday | date:'yyyy-MM-dd'}}</td>
+				</tr>
+			</table>	
+		</div>
+		<script src="js/libs/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/search2.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
